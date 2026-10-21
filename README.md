@@ -1,6 +1,6 @@
 # Satyendra Raj Singh — Personal Portfolio
 
-Live public website: https://satyendra-raj-singh.tubi.chatgpt.site
+Live public website: https://satyendra-raj-singh
 
 ## What you have
 
