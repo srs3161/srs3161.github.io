@@ -1,66 +1,72 @@
 # Satyendra Raj Singh — Personal Portfolio
 
-Live public website: https://satyendra-raj-singh
+A light blue portfolio inspired by the reference layout you shared. Includes a code-card introduction, profile photo area, education, experience, project gallery with detail dialogs, light/dark mode, accent colors, a resume download, and contact links.
 
-## What you have
+No installation, paid services, API keys, or build tools are needed. Open `index.html` in your browser to preview.
 
-This is a complete static website. No framework, database, package installation, or build step is needed.
+## 1. Replace your photo later
 
-- index.html: all website content, navigation, project descriptions, and contact links.
-- styles.css: colors, fonts, spacing, and responsive layout.
-- Satyendra_Raj_Singh_Resume.pdf: the original downloadable resume.
-- .nojekyll: lets GitHub Pages serve the static files directly.
+1. Choose a portrait photo and save it as `profile.jpg`. Use a real JPG image, preferably at least 640 pixels wide. Simply renaming a PNG to JPG does not convert the image.
+2. Put it inside the `assets` folder.
+3. Open `index.html` and find this line (search for `YOUR PHOTO`):
 
-The export preserves the published design and content. CSS has been separated into its own file for easier editing, and resume links use relative paths so they work on other hosts too.
-
-## View and edit on your computer
-
-1. Extract the ZIP (do not edit inside the ZIP).
-2. Open the extracted folder in VS Code.
-3. Double-click index.html to preview it in your browser.
-4. Edit index.html, save, and refresh the browser.
-5. Edit styles.css to change the appearance.
-
-If you have Python installed, you can also run this inside the folder:
-
-```sh
-python -m http.server 8000
+```html
+<img class="profile-photo" src="assets/profile-placeholder.svg" alt="Placeholder for Satyendra's personal photo" width="640" height="760">
 ```
 
-Then open http://localhost:8000. On Windows, use `py` instead of `python` if needed. Press Ctrl+C to stop.
+4. Change it to:
 
-## Common edits
+```html
+<img class="profile-photo" src="assets/profile.jpg" alt="Satyendra Raj Singh" width="640" height="760">
+```
 
-- Name and introduction: search index.html for `I'm Satyendra`.
-- Projects: search for `<section id="projects">`. Each `<article class="project">` is one project.
-- Education and experience: find `<section id="resume">`.
-- Skills: find `<section id="skills">`.
-- Contact links: find `id="contact"`.
-- Colors: edit the CSS custom properties such as --green and --bg in styles.css. Later rules override earlier rules.
-- Resume: replace the PDF using exactly the same filename, or update both resume links in index.html.
+5. Upload both `index.html` and `assets/profile.jpg` to the same locations in GitHub and commit. Your photo will appear after deployment.
 
-The project detail panels use native HTML <details> elements; no JavaScript is required.
+For a PNG photo, use `profile.png` in both the actual filename and the HTML. Use the exact capitalization. To adjust the crop, edit `object-position:center 25%` in the `.profile-photo` CSS rule.
 
-## Update the existing public site
+## 2. Replace your existing GitHub Pages site
 
-Ask in this ChatGPT conversation for the changes you want. You can attach edited files or a replacement resume and request that they be deployed to the existing site.
+1. Extract the ZIP. Do not upload the ZIP itself.
+2. Open the GitHub repository that currently publishes your website.
+3. Open its publishing folder. Usually this is the repository root, where the old `index.html` is located. If Settings > Pages uses `/docs`, use that folder.
+4. Choose **Add file > Upload files**.
+5. Drag in **index.html, styles.css, script.js, the entire assets folder, and Satyendra_Raj_Singh_Resume.pdf**. Keep the directory structure below. You may also upload README.md and .nojekyll. If .nojekyll is hidden on your computer, GitHub's Add file > Create new file can create a file with that name and a blank line.
+6. Commit to the branch that Pages publishes (usually `main`). If you make a pull request instead, merge it into that publishing branch.
+7. Keep any existing **CNAME** file and custom-domain settings. You do not need to change domain DNS for this design update.
+8. Check **Settings > Pages**. For this plain HTML site at the repository root, use **Deploy from a branch**, select **main** and **/(root)**, and Save. Keep a different configured branch/folder if that is where you uploaded your files.
+9. Open **Actions** and wait for the Pages deployment to succeed. Publication can take up to 10 minutes.
+10. Visit the URL shown under Settings > Pages. Hard refresh or use a private window if your browser shows the old design.
 
-Editing the downloaded files on your computer does NOT automatically update the current live site. The live site must be redeployed. This export is not connected to a GitHub repository and has no automatic synchronization with the current host.
+Required files at the publishing root:
 
-## Optional: host a copy from your own GitHub repository
+- `index.html`
+- `styles.css`
+- `script.js`
+- `Satyendra_Raj_Singh_Resume.pdf`
+- `assets/` with all six SVG files, plus your photo when you add one
+- `.nojekyll` (recommended)
+- `CNAME` (keep yours if you already use a custom domain)
 
-1. Sign in to your own GitHub account and create a new public repository named `portfolio`.
-2. Upload the CONTENTS of this folder, not the ZIP or an extra enclosing folder. index.html must be at the repository root. Commit the files to main.
-3. Open repository Settings > Pages.
-4. Under Build and deployment, choose Deploy from a branch.
-5. Select main and /(root), then Save.
-6. Wait for publication and use the live URL shown in Pages settings.
+## 3. Make future changes
 
-For future changes, edit files in that repository and commit to main. GitHub Pages republishes changes from the configured source. Your GitHub-hosted copy and the existing ChatGPT-hosted website are separate deployments.
+| Change | Where to edit |
+| --- | --- |
+| Name, biography, education, experience, projects, contact details | index.html |
+| Detailed project descriptions | The matching `<template id="detail-...">` near the bottom of index.html |
+| Colors, spacing, font sizes, photo crop | styles.css |
+| Rotating role text | `roles` in script.js |
+| Your resume | Replace Satyendra_Raj_Singh_Resume.pdf with the same filename |
+| Project illustrations | Replace the matching SVG in assets, or update the img src to your screenshot |
 
-Official setup reference:
-https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site
+In GitHub, open a file, click the pencil icon, edit, and commit. A commit to the publishing branch triggers another deployment. For CSS or JavaScript changes, increase `?v=4` in index.html to `?v=5`, then to 6 next time, to help prevent stale browser caches.
 
-## Before sharing updates
+## 4. How the contact form works
 
-Check your resume download, contact links, project details, and the layout on both a phone and desktop. Keep a backup or use Git history to track your edits.
+The button opens the visitor's email application with an addressed draft. It does **not** automatically send messages or store them on a server. The visitor reviews and sends the draft. The direct email link is also available. This works with static GitHub Pages hosting without a third-party form service.
+
+## Notes
+
+- All project illustrations are editable SVG concepts, not screenshots of the original applications.
+- GitHub links go to your profile; specific project repository links were not provided.
+- Themes and accent colors are saved only in the visitor's own browser.
+- No analytics, external font dependencies, or ChatGPT branding are included.
